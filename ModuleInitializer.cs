@@ -1,4 +1,9 @@
-﻿using System;
+﻿using Catel.IoC;
+using Catel.MVVM;
+using CatelLobDemo.Services;
+using CatelLobDemo.ViewModels;
+using CatelLobDemo.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,11 +26,34 @@ namespace CatelLobDemo
             RegisterServices();
         }
 
+        /*
+        /// <summary>
+        /// Register views and viewmodels
+        /// </summary>
+        private static void RegisterViewsAndViewModels()
+        {
+            // clear/reset naming conventions
+            var serviceLocator = ServiceLocator.Default;
+
+            var viewModelLocator = serviceLocator.ResolveType<IViewModelLocator>();
+            viewModelLocator.NamingConventions.Clear();
+            viewModelLocator.ClearCache();
+
+            var viewLocator = serviceLocator.ResolveType<IViewLocator>();
+            viewLocator.NamingConventions.Clear();
+            viewLocator.ClearCache();
+
+            viewModelLocator.Register(typeof(ShellView), typeof(ShellViewModel));
+            viewLocator.Register(typeof(ShellViewModel), typeof(ShellView));
+        }
+        */
+
         /// <summary>
         /// Register services
         /// </summary>
         private static void RegisterServices()
         {
+
         }
 
         /// <summary>
@@ -33,6 +61,11 @@ namespace CatelLobDemo
         /// </summary>
         private static void RegisterNavigation()
         {
+            var serviceLocator = ServiceLocator.Default;
+
+            // content navigation (default INavigationService)
+            var contentNavigationRoot = new NavigationRootContentService();
+            serviceLocator.RegisterInstance<Catel.Services.INavigationRootService>(contentNavigationRoot);
         }
     }
 }

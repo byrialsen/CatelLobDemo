@@ -1,12 +1,15 @@
-﻿using System;
+﻿using CatelLobDemo.Views;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -45,6 +48,8 @@ namespace CatelLobDemo
             // just ensure that the window is active
             if (rootFrame == null)
             {
+                SetupWindow();
+
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
 
@@ -66,7 +71,7 @@ namespace CatelLobDemo
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    rootFrame.Navigate(typeof(ShellView), e.Arguments);
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
@@ -95,6 +100,41 @@ namespace CatelLobDemo
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        /// <summary>
+        /// Setup application window.
+        /// (This method is not finished)
+        /// </summary>
+        private void SetupWindow()
+        {
+            // set fullscreen and min windows size
+            Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TryEnterFullScreenMode();
+            Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().SetPreferredMinSize(new Windows.Foundation.Size(1024, 768));
+
+            // core titlebar
+            var coreTitlebar = CoreApplication.GetCurrentView().TitleBar;
+            if (coreTitlebar != null)
+            {
+                coreTitlebar.ExtendViewIntoTitleBar = true;
+            }
+
+            // titlebar
+            var titleBar = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar;
+            if (titleBar != null)
+            {
+                Color backgroundSplashColor = ColorHelper.FromArgb(255, 77, 77, 77);
+
+                // hide title
+                titleBar.BackgroundColor = Colors.Transparent;
+                titleBar.ForegroundColor = backgroundSplashColor;
+
+                // hide button backgrounds (will be visible when mouse over though)
+                titleBar.ButtonBackgroundColor = Colors.Transparent;
+                titleBar.ButtonForegroundColor = backgroundSplashColor;
+                titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+                titleBar.ButtonInactiveForegroundColor = backgroundSplashColor;
+            }
         }
     }
 }

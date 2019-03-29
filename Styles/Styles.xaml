@@ -1,0 +1,12 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CatelLobDemo.Styles"
+    xmlns:models="using:CatelLobDemo.Models">
+
+    <!-- main menu item style -->
+    <DataTemplate x:Key="MenuItemDataTemplate">
+        <TextBlock x:Name="text" Text="{Binding DisplayName}" Padding="8,12,8,12" FontSize="20" Typography.Capitals="SmallCaps" HorizontalAlignment="Center" Foreground="Silver" />
+    </DataTemplate>
+
+</ResourceDictionary>

@@ -1,0 +1,41 @@
+﻿<catelControls:Page
+    x:Class="CatelLobDemo.Views.ShellView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CatelLobDemo.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:catelControls="using:Catel.Windows.Controls"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- menu -->
+        <ListView
+            Background="#FF404040" 
+            ItemsSource="{Binding MenuItems}"
+            IsItemClickEnabled="True"
+            SelectedItem="{Binding SelectedMenuItem, Mode=TwoWay}"
+            ItemTemplate="{StaticResource MenuItemDataTemplate}" >
+
+            <interactivity:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="ItemClick">
+                    <core:InvokeCommandAction Command="{Binding NavigateToMenuItemCommand}" />
+                </core:EventTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
+        </ListView>
+
+        <!-- content frame -->
+        <Frame
+            x:Name="FrameContent"
+            Grid.Column="1"
+            Background="WhiteSmoke" />
+    </Grid>
+</catelControls:Page>
