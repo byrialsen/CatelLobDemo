@@ -11,5 +11,18 @@
 
     <Grid>
         <TextBlock Text="{Binding Title, Mode=OneTime}" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{ThemeResource HeaderTextBlockStyle}"/>
+
+        <Grid
+            Background="#60000000"
+            x:Name="BusyOverlay"
+            Visibility="{Binding IsBusy, Mode=OneWay, Converter={StaticResource BooleanToCollapsingVisibilityConverter}}">
+
+            <Border CornerRadius="12" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Silver" Padding="32,32">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="{Binding BusyText, Mode=OneWay}" Style="{ThemeResource TitleTextBlockStyle}" HorizontalAlignment="Center" Margin="0,0,0,12"/>
+                    <ProgressBar VerticalAlignment="Stretch" IsIndeterminate="True" Width="400"/>
+                </StackPanel>
+            </Border>
+        </Grid>
     </Grid>
 </catelControls:Page>

@@ -1,8 +1,8 @@
-﻿using Catel.MVVM;
+﻿using CatelLobDemo.MVVM;
 
 namespace CatelLobDemo.ViewModels
 {
-    public class OneViewModel : ViewModelBase
+    public class OneViewModel : ViewModelBaseEx
     {
         public OneViewModel()
         {

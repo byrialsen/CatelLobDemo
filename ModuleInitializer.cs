@@ -1,4 +1,5 @@
 ﻿using Catel.IoC;
+using Catel.Logging;
 using Catel.MVVM;
 using CatelLobDemo.Services;
 using CatelLobDemo.ViewModels;
@@ -21,39 +22,29 @@ namespace CatelLobDemo
         /// </summary>
         public static void Initialize()
         {
-            // register services. Important to register navgiation related services first
+            SetupLogger();
             RegisterNavigation();
             RegisterServices();
         }
 
-        /*
         /// <summary>
-        /// Register views and viewmodels
+        /// Setup logging system.
+        /// Please note that FileLogger and MemoryLogger is instantiated by services
         /// </summary>
-        private static void RegisterViewsAndViewModels()
+        private static void SetupLogger()
         {
-            // clear/reset naming conventions
-            var serviceLocator = ServiceLocator.Default;
-
-            var viewModelLocator = serviceLocator.ResolveType<IViewModelLocator>();
-            viewModelLocator.NamingConventions.Clear();
-            viewModelLocator.ClearCache();
-
-            var viewLocator = serviceLocator.ResolveType<IViewLocator>();
-            viewLocator.NamingConventions.Clear();
-            viewLocator.ClearCache();
-
-            viewModelLocator.Register(typeof(ShellView), typeof(ShellViewModel));
-            viewLocator.Register(typeof(ShellViewModel), typeof(ShellView));
+            LogManager.AddDebugListener();
+            LogManager.IgnoreCatelLogging = true;
         }
-        */
 
         /// <summary>
         /// Register services
         /// </summary>
         private static void RegisterServices()
         {
+            var serviceLocator = ServiceLocator.Default;
 
+            serviceLocator.RegisterType<IDataRepositoryService, DataRepositoryService>();
         }
 
         /// <summary>

@@ -2,7 +2,7 @@
 using Catel.MVVM;
 using Catel.Services;
 using CatelLobDemo.Models;
-using System;
+using CatelLobDemo.MVVM;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -11,7 +11,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace CatelLobDemo.ViewModels
 {
-    public class ShellViewModel : ViewModelBase
+    public class ShellViewModel : ViewModelBaseEx
     {
         private readonly INavigationService _navigationService;
 

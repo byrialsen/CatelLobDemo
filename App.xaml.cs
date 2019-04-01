@@ -1,4 +1,5 @@
-﻿using CatelLobDemo.Views;
+﻿using Catel.Logging;
+using CatelLobDemo.Views;
 using System;
 using System.Collections.Generic;
 using System.IO;
